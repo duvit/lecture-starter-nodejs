@@ -2,47 +2,31 @@ import { fighterRepository } from "../repositories/fighterRepository.js";
 
 class FighterService {
   getAllFighters() {
-    try {
-      return fighterRepository.getAll();
-    } catch (error) {
-      throw new Error(`Failed to get fighters: ${error.message}`);
-    }
+    return fighterRepository.getAll();
   }
 
   getFighterById(id) {
-    try {
-      return fighterRepository.getById(id);
-    } catch (error) {
-      throw new Error(`Failed to get fighter by id ${id}: ${error.message}`);
-    }
+    return fighterRepository.getOne({ id });
   }
 
   createFighter(fighterData) {
-    try {
-      // Add your business logic here, e.g. validating fighterData
-
-      return fighterRepository.create(fighterData);
-    } catch (error) {
-      throw new Error(`Failed to create fighter: ${error.message}`);
-    }
+    return fighterRepository.create(fighterData);
   }
 
   updateFighter(id, fighterData) {
-    try {
-      // Add your business logic here, e.g. validating fighterData
-
-      return fighterRepository.update(id, fighterData);
-    } catch (error) {
-      throw new Error(`Failed to update fighter with id ${id}: ${error.message}`);
-    }
+    return fighterRepository.update(id, fighterData);
   }
 
   deleteFighter(id) {
-    try {
-      return fighterRepository.delete(id);
-    } catch (error) {
-      throw new Error(`Failed to delete fighter with id ${id}: ${error.message}`);
+    return fighterRepository.delete(id);
+  }
+
+  search(search) {
+    const item = userRepository.getOne(search);
+    if (!item) {
+      return null;
     }
+    return item;
   }
 
 }
